@@ -1,0 +1,21 @@
+<p>proyecto-form works!</p>
+
+<div>
+    <form [formGroup]="proyectoForm" (submit)="onSubmit()">
+
+        <label for="nombre">Nombre del Proyecto:</label>
+        <input type="text" formControlName="nombre" />
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" formControlName="descripcion" />
+
+        <label for="estado">Estado:</label>
+        <select formControlName="estado">
+            <option value="Pendiente">Pendiente</option>
+            <option value="En Progreso">En Progreso</option>
+            <option value="Completado">Completado</option>
+        </select>
+        <br>
+        <button type="submit">Crear Proyecto</button>
+    </form>
+</div>

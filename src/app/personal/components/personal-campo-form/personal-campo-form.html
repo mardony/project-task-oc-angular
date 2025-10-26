@@ -1,0 +1,18 @@
+<p>personal-campo-form works!</p>
+
+<form [formGroup]="personalForm" (ngSubmit)="onSubmit()">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" formControlName="nombre" />
+
+    <label for="apellido">Apellido:</label>
+    <input id="apellido" formControlName="apellido" />
+
+    <label for="puesto">Puesto:</label>
+    <input id="puesto" formControlName="puesto" />
+
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" />
+
+    <button type="submit">Agregar Personal</button>
+</form>
+
