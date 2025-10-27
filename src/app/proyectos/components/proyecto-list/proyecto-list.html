@@ -1,12 +1,6 @@
-<p>proyecto-list works!</p>
-
-<ul>
-    @for(proyecto of proyectos; track $index) {
-    <li>
-        Nombre: {{ proyecto.nombre }}, Descripción: {{ proyecto.descripcion }}, Estado: {{ proyecto.estado }}
-    </li>
-    }
-</ul>
+<div>
+    <h2>LISTA DE PROYECTOS</h2>
+</div>
 
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">

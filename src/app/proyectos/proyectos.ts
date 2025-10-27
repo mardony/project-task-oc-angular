@@ -22,6 +22,12 @@ export class Proyectos {
   ];
 
   onAddProyecto(proyecto: Proyecto) {
-    this.proyectos.push(proyecto);
+    console.log('Nuevo proyecto agregado:', proyecto);
+
+    const newProyecto= {
+      ...proyecto,
+      id: this.proyectos.length >0? this.proyectos[this.proyectos.length -1].id +1 : 1
+    };
+    this.proyectos = [...this.proyectos, newProyecto];
   }
 }

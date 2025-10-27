@@ -6,6 +6,11 @@ import { PersonalCampoForm } from './components/personal-campo-form/personal-cam
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { SharedModule } from '../shared/shared-module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 
@@ -16,11 +21,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     PersonalCampoForm
   ],
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatGridListModule
   ],
   exports: [
     Personal

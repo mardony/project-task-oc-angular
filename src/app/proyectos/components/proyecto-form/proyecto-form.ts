@@ -23,9 +23,10 @@ export class ProyectoForm {
 
   onSubmit() {
     if (this.proyectoForm.valid) {
-      this.sendProyecto.emit(this.proyectoForm.value);
-      this.proyectoForm.reset();
+      alert('Proyecto enviado correctamente');
+      return;
     }
+    this.sendProyecto.emit(this.proyectoForm.value);
   }
   get isNombreInvalid() {
     return this.proyectoForm.controls['nombre'].dirty && this.proyectoForm.controls['nombre'].invalid;

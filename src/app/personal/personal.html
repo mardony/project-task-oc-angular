@@ -1,4 +1,11 @@
-<p>personal works!</p>
+<mat-grid-list cols="3" rowHeight="fit" gutterSize="10px" class="user-grid">
+    <!-- Formulario ocupa 1 columna -->
+    <mat-grid-tile [colspan]="1" class="form-tile">
+        <app-personal-campo-form (sendPersonal)="onAddPersonal($event)"></app-personal-campo-form>
+    </mat-grid-tile>
 
-<app-personal-campo-list [personal]="personal"></app-personal-campo-list>
-<app-personal-campo-form (sendPersonal)="onAddPersonal($event)"></app-personal-campo-form>
+    <!-- Lista ocupa 2 columnas -->
+    <mat-grid-tile [colspan]="2" class="table-tile">
+        <app-personal-campo-list [personal]="personal"></app-personal-campo-list>
+    </mat-grid-tile>
+</mat-grid-list>

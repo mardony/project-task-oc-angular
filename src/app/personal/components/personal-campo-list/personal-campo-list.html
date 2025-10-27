@@ -1,13 +1,6 @@
-<p>personal-campo-list works!</p>
-
-<ul>
-    @for(persona of personal; track $index) {
-    <li>
-        Nombre: {{ persona.nombre }}, Apellido: {{ persona.apellido }}, Puesto: {{ persona.puesto }}, Email: {{
-        persona.email }}
-    </li>
-    }
-</ul>
+<div>
+    <h2>LISTA DE COLABORADORES</h2>
+</div>
 
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">

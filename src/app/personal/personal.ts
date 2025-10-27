@@ -22,6 +22,12 @@ export class Personal {
   ];
 
   onAddPersonal(persona: IPersonal) {
-    this.personal.push(persona);
+    console.log('Nuevo personal agregado:', persona);
+
+    const newPersona= {
+      ...persona,
+      id: this.personal.length >0? this.personal[this.personal.length -1].id +1 : 1
+    };
+    this.personal = [...this.personal, newPersona];
   }
 }

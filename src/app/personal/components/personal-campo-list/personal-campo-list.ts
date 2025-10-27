@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { IPersonal } from '../../interface/ipersonal';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,11 +9,20 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './personal-campo-list.html',
   styleUrl: './personal-campo-list.css'
 })
-export class PersonalCampoList {
+export class PersonalCampoList implements  AfterViewInit, OnChanges {
   @Input() personal: IPersonal[] = [];
 
-  dataSource = new MatTableDataSource<IPersonal>(this.personal);
+  dataSource = new MatTableDataSource<IPersonal>();
   displayedColumns: string[] = ['id', 'nombre', 'apellido', 'puesto', 'email'];
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['personal']) {
+      this.dataSource.data = this.personal;
+      if (this.paginator) {
+        this.paginator.length = this.personal.length;
+      }
+    }
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngAfterViewInit() {
