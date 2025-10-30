@@ -26,7 +26,8 @@ export class AlumnoForm {
   }
 
   onSubmit() {
-    if (this.alumnoForm.valid) {
+    if (this.alumnoForm.invalid) {
+      alert('Los campos deben ser validos')
       return;
     }
 

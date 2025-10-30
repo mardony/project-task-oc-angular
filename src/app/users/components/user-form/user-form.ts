@@ -17,7 +17,7 @@ export class UserForm {
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-      rol: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]],
+      rol: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       email: ['', [Validators.required, Validators.email]]
     });
   }

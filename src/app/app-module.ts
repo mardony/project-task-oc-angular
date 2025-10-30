@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { UsersModule } from './users/users-module';
-import { PersonalModule } from './personal/personal-module';
-import { ProyectosModule } from './proyectos/proyectos-module';
 import { AlumnosModule } from './alumnos/alumnos-module';
 import { InscripcionesModule } from './inscripciones/inscripciones-module';
 import { CursosModule } from './cursos/cursos-module';
@@ -17,8 +15,6 @@ import { CursosModule } from './cursos/cursos-module';
     BrowserModule,
     AppRoutingModule,
     UsersModule,
-    PersonalModule,
-    ProyectosModule,
     AlumnosModule,
     InscripcionesModule,
     CursosModule

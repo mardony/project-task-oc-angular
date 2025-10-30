@@ -5,7 +5,7 @@ import { AlumnoLista } from './components/alumno-lista/alumno-lista';
 import { AlumnoForm } from './components/alumno-form/alumno-form';
 import { SharedModule } from '../shared/shared-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

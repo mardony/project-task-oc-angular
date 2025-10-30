@@ -16,15 +16,15 @@ export class CursoForm {
   constructor(private fb: FormBuilder){
     this.cursoForm = this.fb.group({
       asignatura: ['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
-      descripcion: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+      descripcion: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(500)]],
       fechaInicio: ['',[Validators.required]],
       fechaFin: ['', [Validators.required]]
     })
   }
 
   onSubmit(){
-    if(this.cursoForm.valid){
-      alert('Curso enviado correctamente');
+    if(this.cursoForm.invalid){
+      alert('Los campos deben ser validos');
       return;
     }
     this.sendCurso.emit(this.cursoForm.value);
