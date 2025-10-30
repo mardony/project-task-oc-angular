@@ -1,0 +1,40 @@
+<p>ALUMNOS</p>
+
+<div>
+    <form [formGroup]="alumnoForm" (submit)="onSubmit()">
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Nombre:</mat-label>
+            <input matInput type="text" formControlName="nombre" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Apellido Paterno:</mat-label>
+            <input matInput type="text" formControlName="apellidoPaterno" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Apellido Materno:</mat-label>
+            <input matInput type="text" formControlName="apellidoMaterno" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>DNI:</mat-label>
+            <input matInput type="text" formControlName="dni" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>E-mail:</mat-label>
+            <input matInput type="text" formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput type="text" formControlName="fechaNacimiento">
+        </mat-form-field>
+        <br>
+        <div class="example-button-row">
+            <button matButton="outlined" type="submit">Agregar Curso</button>
+        </div>
+    </form>
+</div>

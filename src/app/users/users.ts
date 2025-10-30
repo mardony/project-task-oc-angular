@@ -12,11 +12,11 @@ export class Users {
     { id: 1, nombre: 'juan', rol: 'admin', email: 'juan@example.com' },
     { id: 2, nombre: 'bob', rol: 'user', email: 'bob@example.com' },
     { id: 3, nombre: 'charlie', rol: 'user', email: 'charlie@example.com' },
-    { id: 4, nombre: 'ana', rol: 'moderator', email: 'ana@dd.com'},
+    { id: 4, nombre: 'ana', rol: 'admin', email: 'ana@dd.com'},
     { id: 5, nombre: 'luis', rol: 'user', email: 'luis@example.com' },
     { id: 6, nombre: 'marta', rol: 'admin', email: 'marta@example.com' },
     { id: 7, nombre: 'sofia', rol: 'user', email: 'sofia@example.com' },
-    { id: 8, nombre: 'diego', rol: 'moderator', email: 'diego@example.com' },
+    { id: 8, nombre: 'diego', rol: 'user', email: 'diego@example.com' },
     { id: 9, nombre: 'lucia', rol: 'user', email: 'lucia@example.com' }
   ];
 

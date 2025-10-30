@@ -1,0 +1,30 @@
+<p>Curso</p>
+
+<div>
+    <form [formGroup]="cursoForm" (submit)="onSubmit()">
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Asignatura:</mat-label>
+            <input matInput type="text" formControlName="asignatura" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Descripción:</mat-label>
+            <input matInput type="text" formControlName="descripcion" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Fecha de Inicio</mat-label>
+            <input matInput type="text" formControlName="fechaInicio">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Fecha de Fin</mat-label>
+            <input matInput type="text" formControlName="fechaFin">
+        </mat-form-field>
+        <br>
+        <div class="example-button-row">
+            <button matButton="outlined" type="submit">Agregar Curso</button>
+        </div>
+    </form>
+</div>

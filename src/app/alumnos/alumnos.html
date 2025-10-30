@@ -1,0 +1,11 @@
+<mat-grid-list cols="3" rowHeight="fit" gutterSize="10px" class="user-grid">
+    <!-- Formulario ocupa 1 columna -->
+    <mat-grid-tile [colspan]="1" class="form-tile">
+        <app-alumno-form (sendAlumno)="onAddAlumno($event)"></app-alumno-form>
+    </mat-grid-tile>
+
+    <!-- Lista ocupa 2 columnas -->
+    <mat-grid-tile [colspan]="2" class="table-tile">
+        <app-alumno-lista [alumnos]="alumnos"></app-alumno-lista>
+    </mat-grid-tile>
+</mat-grid-list>
