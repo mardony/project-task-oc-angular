@@ -1,9 +1,13 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "pnpm",
+    "analytics": false
+  },
   "newProjectRoot": "projects",
   "projects": {
-    "project-task": {
+    "project-albuho": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -67,10 +71,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "project-task:build:production"
+              "buildTarget": "project-albuho:build:production"
             },
             "development": {
-              "buildTarget": "project-task:build:development"
+              "buildTarget": "project-albuho:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,8 +103,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }

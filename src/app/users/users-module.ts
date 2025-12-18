@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../shared/shared-module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { UserService } from '../services/user-service';
+
 
 
 
@@ -19,8 +21,9 @@ import { MatSelectModule } from '@angular/material/select';
   declarations: [
     Users,
     UserList,
-    UserForm
+    UserForm,
   ],
+  providers:[UserService],
   imports: [
     SharedModule,
     CommonModule,

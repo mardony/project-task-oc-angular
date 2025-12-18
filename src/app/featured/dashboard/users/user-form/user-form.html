@@ -1,0 +1,104 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>{{ isEditing ? 'Editar Usuario' : 'Nuevo Usuario' }}</h2>
+    <p>{{ isEditing ? 'Modifica los datos del usuario' : 'Completa los datos para registrar un nuevo usuario' }}</p>
+  </div>
+  
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+    <div class="form-grid">
+      <!-- Username Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput formControlName="username" placeholder="Ej: juanperez">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="hasError('username', 'required')">
+          El nombre de usuario es requerido
+        </mat-error>
+        <mat-error *ngIf="hasError('username', 'minlength')">
+          Mínimo 3 caracteres
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Email Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Ej: juan.perez@email.com">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="hasError('email', 'required')">
+          El email es requerido
+        </mat-error>
+        <mat-error *ngIf="hasError('email', 'email')">
+          Email inválido
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Password Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ isEditing ? 'Nueva contraseña (opcional)' : 'Contraseña' }}</mat-label>
+        <input matInput [type]="showPassword ? 'text' : 'password'" 
+               formControlName="password" 
+               placeholder="{{ isEditing ? 'Dejar en blanco para mantener' : 'Mínimo 4 caracteres' }}">
+        <button mat-icon-button matSuffix type="button" 
+                (click)="togglePasswordVisibility()"
+                [attr.aria-label]="showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+          <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="!isEditing && hasError('password', 'required')">
+          La contraseña es requerida
+        </mat-error>
+        <mat-error *ngIf="!isEditing && hasError('password', 'minlength')">
+          Mínimo 4 caracteres
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Full Name Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre completo</mat-label>
+        <input matInput formControlName="fullName" placeholder="Ej: Juan Pérez García">
+        <mat-icon matSuffix>badge</mat-icon>
+      </mat-form-field>
+      
+      <!-- Phone Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phone" placeholder="Ej: +34 123 456 789">
+        <mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+      
+      <!-- Address Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Dirección</mat-label>
+        <textarea matInput formControlName="address" placeholder="Ej: Calle Falsa 123, Ciudad"
+                  rows="2"></textarea>
+        <mat-icon matSuffix>location_on</mat-icon>
+      </mat-form-field>
+      
+      <!-- Role Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="role">
+          @for (option of roleOptions; track option.value) {
+            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix>admin_panel_settings</mat-icon>
+        <mat-error *ngIf="hasError('role', 'required')">
+          El rol es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-actions">
+      <button mat-button type="button" (click)="onCancel()" [disabled]="isLoading">
+        Cancelar
+      </button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid || isLoading">
+        @if (isLoading) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          {{ isEditing ? 'Actualizar' : 'Guardar' }}
+        }
+      </button>
+    </div>
+  </form>
+</div>

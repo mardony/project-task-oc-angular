@@ -1,0 +1,87 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>{{ isEditing ? 'Editar Alumno' : 'Nuevo Alumno' }}</h2>
+    <p>{{ isEditing ? 'Modifica los datos del alumno' : 'Completa los datos para registrar un nuevo alumno' }}</p>
+  </div>
+  
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="student-form">
+    <div class="form-grid">
+      <!-- Name Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre completo</mat-label>
+        <input matInput formControlName="name" placeholder="Ej: Juan Pérez">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="hasError('name', 'required')">
+          El nombre es requerido
+        </mat-error>
+        <mat-error *ngIf="hasError('name', 'minlength')">
+          El nombre debe tener al menos 3 caracteres
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Email Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Ej: juan.perez@email.com">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="hasError('email', 'required')">
+          El email es requerido
+        </mat-error>
+        <mat-error *ngIf="hasError('email', 'email')">
+          Email inválido
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Phone Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phone" placeholder="Ej: +34 123 456 789">
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error *ngIf="hasError('phone', 'required')">
+          El teléfono es requerido
+        </mat-error>
+        <mat-error *ngIf="hasError('phone', 'pattern')">
+          Formato de teléfono inválido
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Address Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Dirección</mat-label>
+        <textarea matInput formControlName="address" placeholder="Ej: Calle Falsa 123, Ciudad"
+                  rows="3"></textarea>
+        <mat-icon matSuffix>location_on</mat-icon>
+        <mat-error *ngIf="hasError('address', 'required')">
+          La dirección es requerida
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Profile Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Perfil</mat-label>
+        <mat-select formControlName="profile">
+          @for (option of profileOptions; track option.value) {
+            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          }
+        </mat-select>
+        <mat-icon matSuffix>work</mat-icon>
+        <mat-error *ngIf="hasError('profile', 'required')">
+          El perfil es requerido
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-actions">
+      <button mat-button type="button" (click)="onCancel()" [disabled]="isLoading">
+        Cancelar
+      </button>
+      <button mat-flat-button color="primary" type="submit" [disabled]="studentForm.invalid || isLoading">
+        @if (isLoading) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          {{ isEditing ? 'Actualizar' : 'Guardar' }}
+        }
+      </button>
+    </div>
+  </form>
+</div>

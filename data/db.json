@@ -1,0 +1,166 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "1234",
+      "role": "ADMIN",
+      "fullName": "Administrador Principal",
+      "phone": "123456789",
+      "address": "Calle Principal 123",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "email": "user@gmail.com",
+      "password": "1234",
+      "role": "USER",
+      "fullName": "Usuario Regular",
+      "phone": "987654321",
+      "address": "Avenida Secundaria 456",
+      "createdAt": "2024-01-02T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "username": "juan",
+      "email": "juan.perez@email.com",
+      "password": "1234",
+      "role": "USER",
+      "fullName": "Juan Pérez García",
+      "phone": "555-0101",
+      "address": "Calle Falsa 123",
+      "createdAt": "2024-01-03T00:00:00.000Z"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "name": "Juan Pérez",
+      "email": "juan.perez@email.com",
+      "phone": "555-0101",
+      "address": "Calle Falsa 123",
+      "profile": "DEVELOPER",
+      "createdAt": "2024-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "María García",
+      "email": "maria.garcia@email.com",
+      "phone": "555-0102",
+      "address": "Avenida Real 456",
+      "profile": "IT",
+      "createdAt": "2024-01-11T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "name": "Carlos López",
+      "email": "carlos.lopez@email.com",
+      "phone": "555-0103",
+      "address": "Plaza Central 789",
+      "profile": "END_USER",
+      "createdAt": "2024-01-12T00:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "name": "Ana Martínez",
+      "email": "ana.martinez@email.com",
+      "phone": "555-0104",
+      "address": "Boulevard Norte 101",
+      "profile": "DEVELOPER",
+      "createdAt": "2024-01-13T00:00:00.000Z"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "title": "Angular Avanzado",
+      "description": "Curso avanzado de Angular con prácticas reales, incluyendo NgRx, servicios, interceptores y más",
+      "beginDate": "2024-02-01T00:00:00.000Z",
+      "endDate": "2024-03-31T00:00:00.000Z",
+      "status": "STARTED",
+      "hours": 40,
+      "classes": 20,
+      "professor": "Dr. Smith"
+    },
+    {
+      "id": "2",
+      "title": "React desde Cero",
+      "description": "Introducción completa a React con hooks, context API y pruebas unitarias",
+      "beginDate": "2024-03-01T00:00:00.000Z",
+      "endDate": "2024-04-30T00:00:00.000Z",
+      "status": "SCHEDULED",
+      "hours": 30,
+      "classes": 15,
+      "professor": "Prof. Johnson"
+    },
+    {
+      "id": "3",
+      "title": "Node.js Backend",
+      "description": "Desarrollo backend con Node.js, Express y MongoDB",
+      "beginDate": "2024-01-15T00:00:00.000Z",
+      "endDate": "2024-02-28T00:00:00.000Z",
+      "status": "FINISHED",
+      "hours": 35,
+      "classes": 18,
+      "professor": "Ing. Williams"
+    },
+    {
+      "id": "4",
+      "title": "Diseño UI/UX",
+      "description": "Principios de diseño de interfaces y experiencia de usuario",
+      "beginDate": "2024-04-01T00:00:00.000Z",
+      "endDate": "2024-05-31T00:00:00.000Z",
+      "status": "SCHEDULED",
+      "hours": 25,
+      "classes": 12,
+      "professor": "Dra. Brown"
+    },
+    {
+      "id": "5",
+      "title": "nknn",
+      "description": "dscsdc",
+      "beginDate": "2025-12-17T05:00:00.000Z",
+      "endDate": "2025-12-26T05:00:00.000Z",
+      "status": "STARTED"
+    }
+  ],
+  "inscriptions": [
+    {
+      "id": "1",
+      "studentId": "1",
+      "courseId": "1",
+      "inscriptionDate": "2024-01-15T10:30:00.000Z",
+      "userId": "1"
+    },
+    {
+      "id": "2",
+      "studentId": "2",
+      "courseId": "1",
+      "inscriptionDate": "2024-01-16T14:45:00.000Z",
+      "userId": "2"
+    },
+    {
+      "id": "3",
+      "studentId": "3",
+      "courseId": "2",
+      "inscriptionDate": "2024-01-17T09:15:00.000Z",
+      "userId": "1"
+    },
+    {
+      "id": "4",
+      "studentId": "4",
+      "courseId": "3",
+      "inscriptionDate": "2024-01-10T16:20:00.000Z",
+      "userId": "2"
+    },
+    {
+      "id": "5",
+      "studentId": "1",
+      "courseId": "2",
+      "inscriptionDate": "2024-01-18T11:00:00.000Z",
+      "userId": "1"
+    }
+  ]
+}

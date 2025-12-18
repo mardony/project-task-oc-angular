@@ -1,0 +1,122 @@
+.table-container {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  color: #666;
+}
+
+.loading-container mat-spinner {
+  margin-bottom: 16px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.search-field {
+  min-width: 300px;
+}
+
+.table-wrapper {
+  overflow: auto;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-header-row {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+.mat-mdc-header-cell {
+  color: #333;
+  font-size: 14px;
+}
+
+.mat-mdc-cell {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.student-cell,
+.course-cell,
+.date-cell,
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.student-cell mat-icon,
+.course-cell mat-icon,
+.date-cell mat-icon,
+.user-cell mat-icon {
+  color: #666;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.actions-container {
+  display: flex;
+  gap: 8px;
+}
+
+.no-data-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-data-message mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-data-message p {
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .table-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-field {
+    min-width: 100%;
+  }
+  
+  .student-cell,
+  .course-cell,
+  .date-cell,
+  .user-cell {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

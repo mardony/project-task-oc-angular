@@ -1,0 +1,61 @@
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <div class="sidenav-header">
+      <h4>Platform Learning</h4>
+      <div class="user-info-side">
+        @if (user$ | async; as user) {
+          <div class="user-avatar">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="user-details">
+            <strong>{{ user.username }}</strong>
+            <small>{{ user.role === 'ADMIN' ? 'Administrador' : 'Usuario' }}</small>
+          </div>
+        }
+      </div>
+    </div>
+    
+    <mat-nav-list>
+      @for (item of menuItems; track $index) {
+        @if (item.visible) {
+          <a mat-list-item [routerLink]="item.url" routerLinkActive="active" 
+             [routerLinkActiveOptions]="{exact: true}" (click)="drawer.close()">
+            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+            <span matListItemLine>{{ item.name }}</span>
+          </a>
+        }
+      }
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="logout()" class="logout-button">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemLine>Salir</span>
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="main-content-wrapper">
+    <mat-toolbar color="primary">
+      <button
+        mat-icon-button
+        class="menu-button"
+        (click)="drawer.toggle()"
+        aria-label="Toggle menu"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="app-title">Platform Learning Management</span>
+      <span class="spacer"></span>
+      <div class="toolbar-user-info">
+        @if (user$ | async; as user) {
+          <mat-icon class="user-icon">person</mat-icon>
+          <span class="user-name">{{ user.username }}</span>
+          <span class="user-role">({{ user.role === 'ADMIN' ? 'Admin' : 'User' }})</span>
+        }
+      </div>
+    </mat-toolbar>
+    
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</mat-drawer-container>
