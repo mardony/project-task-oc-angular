@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule,
     StudentsRoutingModule,
     SharedModule,
+    // VERIFICA que esta línea esté presente y correcta:
     StoreModule.forFeature(studentsFeature),
     EffectsModule.forFeature([StudentsEffects]),
     MatProgressSpinnerModule

@@ -1,3 +1,4 @@
+
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { User } from '../../../../core/services/users/model/User';
 import { UsersActions } from './users.actions';
@@ -47,13 +48,27 @@ export const reducer = createReducer(
     isLoading: false,
     error
   })),
+  on(UsersActions.updateUser, (state) => ({
+    ...state,
+    isLoading: true
+  })),
+  on(UsersActions.updateUserSuccess, (state, { user }) => ({
+    ...state,
+    users: state.users.map(u => u.id.toString() === user.id.toString() ? user : u),
+    isLoading: false
+  })),
+  on(UsersActions.updateUserFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error
+  })),
   on(UsersActions.deleteUser, (state) => ({
     ...state,
     isLoading: true
   })),
   on(UsersActions.deleteUserSuccess, (state, { id }) => ({
     ...state,
-    users: state.users.filter(user => user.id !== id),
+    users: state.users.filter(user => user.id.toString() !== id.toString()),
     isLoading: false
   })),
   on(UsersActions.deleteUserFailure, (state, { error }) => ({

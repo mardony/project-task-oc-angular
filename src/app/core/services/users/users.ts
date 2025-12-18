@@ -1,8 +1,9 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '../../utils/constants';
 import { User } from './model/User';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,3 @@ export class UsersService {
     return this.http.get<User[]>(this.usersUrl);
   }
 }
-
-// Añadir el import de tap
-import { tap } from 'rxjs/operators';

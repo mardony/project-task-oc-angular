@@ -1,11 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, filter, take } from 'rxjs';
 import { User, Role } from '../../../../core/services/users/model/User';
 import { UsersActions } from '../store/users.actions';
-import { selectUserById } from '../store/users.selectors';
+import { selectUserById, selectIsLoading } from '../store/users.selectors';
 import { RootState } from '../../../../core/store';
 
 @Component({
@@ -15,14 +16,13 @@ import { RootState } from '../../../../core/store';
   standalone: false
 })
 export class UserForm implements OnInit {
-
   userForm: FormGroup;
   userId: string | null = null;
   isEditing = false;
   isLoading = false;
   user$: Observable<User | undefined>;
   showPassword = false;
-
+  
   roleOptions = [
     { value: Role.ADMIN, label: 'Administrador' },
     { value: Role.USER, label: 'Usuario' }
@@ -43,32 +43,40 @@ export class UserForm implements OnInit {
       address: [''],
       role: [Role.USER, Validators.required]
     });
-
-    // Inicialización correcta (sin valores ficticios)
+    
     this.user$ = new Observable<User | undefined>();
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = params['id'];
-
       if (id) {
         this.userId = id;
         this.isEditing = true;
-
+        
         // Actualizar validaciones de password en edición
         const passwordControl = this.userForm.get('password');
-        passwordControl?.clearValidators();
-        passwordControl?.updateValueAndValidity();
-
+        if (passwordControl) {
+          passwordControl.clearValidators();
+          passwordControl.setValidators([Validators.minLength(4)]);
+          passwordControl.updateValueAndValidity();
+        }
+        
         this.user$ = this.store.select(selectUserById(id));
-
         this.user$.subscribe(user => {
           if (user) {
             const { password, ...userData } = user;
             this.userForm.patchValue(userData);
           }
         });
+      }
+    });
+
+    // Escuchar cambios en el estado de carga
+    this.store.select(selectIsLoading).subscribe(isLoading => {
+      if (!isLoading && this.isLoading) {
+        this.isLoading = false;
+        this.router.navigate(['dashboard', 'users']);
       }
     });
   }
@@ -81,7 +89,7 @@ export class UserForm implements OnInit {
 
     this.isLoading = true;
     const userData = { ...this.userForm.value };
-
+    
     // En edición, no enviar password vacío
     if (this.isEditing && !userData.password) {
       delete userData.password;
@@ -101,9 +109,6 @@ export class UserForm implements OnInit {
         })
       );
     }
-
-    this.isLoading = false;
-    this.router.navigate(['dashboard', 'users']);
   }
 
   onCancel(): void {
@@ -130,19 +135,15 @@ export class UserForm implements OnInit {
 
   getErrorMessage(controlName: string): string | null {
     const control = this.userForm.get(controlName);
-
     if (control?.hasError('required')) {
       return 'Este campo es requerido';
     }
-
     if (control?.hasError('minlength')) {
       return `Mínimo ${control.errors?.['minlength'].requiredLength} caracteres`;
     }
-
     if (control?.hasError('email')) {
       return 'Email inválido';
     }
-
     return null;
   }
 }

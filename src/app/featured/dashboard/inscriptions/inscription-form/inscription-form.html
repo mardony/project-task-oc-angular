@@ -1,63 +1,110 @@
+<!-- project-albuho/src/app/featured/dashboard/inscriptions/inscription-form/inscription-form.html -->
 <div class="form-container">
   <div class="form-header">
     <h2>Nueva Inscripción</h2>
     <p>Selecciona un alumno y un curso</p>
   </div>
-
-  <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
-
-    <!-- ALUMNO -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Alumno</mat-label>
-      <mat-select formControlName="studentId">
-        @if (students$ | async; as students) {
-          @for (student of students; track student.id) {
-            <mat-option [value]="student.id">
-              {{ student.name }} — {{ student.email }}
-            </mat-option>
+  
+  <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()" class="inscription-form">
+    <div class="form-grid">
+      <!-- ALUMNO -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Alumno</mat-label>
+        <mat-select formControlName="studentId">
+          @if (students$ | async; as students) {
+            @if (students.length > 0) {
+              <mat-option value="">Selecciona un alumno</mat-option>
+              @for (student of students; track student.id) {
+                <mat-option [value]="student.id">
+                  {{ student.name }} - {{ student.email }}
+                </mat-option>
+              }
+            } @else {
+              <mat-option value="" disabled>Cargando alumnos...</mat-option>
+            }
           }
-        }
-      </mat-select>
-      <mat-error *ngIf="hasError('studentId','required')">
-        Selecciona un alumno
-      </mat-error>
-    </mat-form-field>
-
-    <!-- CURSO -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Curso</mat-label>
-      <mat-select formControlName="courseId">
-        @if (courses$ | async; as courses) {
-          @for (course of getActiveCourses(courses); track course.id) {
-            <mat-option [value]="course.id">
-              {{ course.title }} • {{ course.description.substring(0,50) }}...
-            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('studentId','required')">
+          Debes seleccionar un alumno
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- CURSO -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Curso</mat-label>
+        <mat-select formControlName="courseId">
+          @if (courses$ | async; as courses) {
+            @if (courses.length > 0) {
+              <mat-option value="">Selecciona un curso</mat-option>
+              @for (course of getActiveCourses(courses); track course.id) {
+                <mat-option [value]="course.id">
+                  {{ course.title }} - {{ course.status }}
+                </mat-option>
+              }
+            } @else {
+              <mat-option value="" disabled>Cargando cursos...</mat-option>
+            }
           }
-        }
-      </mat-select>
-      <mat-error *ngIf="hasError('courseId','required')">
-        Selecciona un curso
-      </mat-error>
-    </mat-form-field>
-
+        </mat-select>
+        <mat-error *ngIf="hasError('courseId','required')">
+          Debes seleccionar un curso
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
     <!-- INFO -->
     <mat-card>
+      <mat-card-header>
+        <mat-card-title>Resumen de la inscripción</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <p><strong>Alumno:</strong> {{ selectedStudentName$ | async }}</p>
-        <p><strong>Curso:</strong> {{ selectedCourseTitle$ | async }}</p>
-        <p><strong>Fecha:</strong> {{ currentDate | date:'fullDate' }}</p>
-        <p><strong>Registrado por:</strong> {{ currentUser?.username || 'Usuario' }}</p>
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon>person</mat-icon>
+            <div>
+              <h3>Alumno seleccionado:</h3>
+              <p>{{ selectedStudentName$ | async }}</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>school</mat-icon>
+            <div>
+              <h3>Curso seleccionado:</h3>
+              <p>{{ selectedCourseTitle$ | async }}</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>calendar_today</mat-icon>
+            <div>
+              <h3>Fecha de inscripción:</h3>
+              <p>{{ currentDate | date:'fullDate' }}</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>person_pin</mat-icon>
+            <div>
+              <h3>Registrado por:</h3>
+              <p>{{ currentUser?.username || 'Usuario' }}</p>
+            </div>
+          </div>
+        </div>
       </mat-card-content>
     </mat-card>
-
+    
     <!-- ACCIONES -->
     <div class="form-actions">
       <button mat-button type="button" (click)="onCancel()">Cancelar</button>
       <button mat-flat-button color="primary" type="submit"
               [disabled]="inscriptionForm.invalid || isLoading">
-        Crear Inscripción
+        @if (isLoading) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          Crear Inscripción
+        }
       </button>
     </div>
-
   </form>
 </div>

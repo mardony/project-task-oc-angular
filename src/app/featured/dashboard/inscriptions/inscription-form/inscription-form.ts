@@ -7,15 +7,13 @@ import { Observable, combineLatest, map, startWith } from 'rxjs';
 import { Student } from '../../../../core/services/students/model/Student';
 import { Course, CourseStatus } from '../../../../core/services/courses/model/Course';
 import { RootState } from '../../../../core/store';
-
 import { selectStudents } from '../../students/store/students.selectors';
 import { selectCourses } from '../../courses/store/courses.selectors';
-
 import { StudentsActions } from '../../students/store/students.actions';
 import { CoursesActions } from '../../courses/store/courses.actions';
 import { InscriptionsActions } from '../store/inscriptions.actions';
-
 import { AuthService } from '../../../../core/services/auth/auth';
+import { selectIsLoading } from '../store/inscriptions.selectors';
 
 @Component({
   selector: 'app-inscription-form',
@@ -54,6 +52,14 @@ export class InscriptionForm implements OnInit {
     this.authService.user$.subscribe(user => {
       this.currentUser = user;
     });
+
+    // Escuchar estado de carga
+    this.store.select(selectIsLoading).subscribe(isLoading => {
+      if (!isLoading && this.isLoading) {
+        this.isLoading = false;
+        this.router.navigate(['dashboard', 'inscriptions']);
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -67,7 +73,8 @@ export class InscriptionForm implements OnInit {
       )
     ]).pipe(
       map(([students, studentId]) =>
-        students.find(s => s.id === studentId)?.name ?? 'No seleccionado'
+        students.find(s => s.id.toString() === studentId?.toString())?.name
+        ?? 'No seleccionado'
       )
     );
 
@@ -78,7 +85,8 @@ export class InscriptionForm implements OnInit {
       )
     ]).pipe(
       map(([courses, courseId]) =>
-        courses.find(c => c.id === courseId)?.title ?? 'No seleccionado'
+        courses.find(c => c.id.toString() === courseId?.toString())?.title
+        ?? 'No seleccionado'
       )
     );
   }
@@ -93,13 +101,10 @@ export class InscriptionForm implements OnInit {
             studentId: this.inscriptionForm.value.studentId,
             courseId: this.inscriptionForm.value.courseId,
             userId: this.currentUser.id,
-            inscriptionDate: new Date()
+            inscriptionDate: new Date() // ✅ FIX DEFINITIVO
           }
         })
       );
-
-      this.isLoading = false;
-      this.router.navigate(['dashboard', 'inscriptions']);
     }
   }
 

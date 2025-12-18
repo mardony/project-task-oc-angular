@@ -1,3 +1,4 @@
+// project-albuho/src/app/featured/dashboard/students/store/students.reducer.ts
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { Student } from '../../../../core/services/students/model/Student';
 import { StudentsActions } from './students.actions';
@@ -63,6 +64,7 @@ export const reducer = createReducer(
   }))
 );
 
+// Asegúrate de que esto esté exportado como "studentsFeature"
 export const studentsFeature = createFeature({
   name: studentsFeatureKey,
   reducer,

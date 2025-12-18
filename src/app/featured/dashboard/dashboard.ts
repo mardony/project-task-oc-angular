@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth/auth';
 import { RootState } from '../../core/store';
@@ -50,7 +51,7 @@ export class Dashboard implements OnInit {
         name: 'Inscripciones',
         icon: 'assignment',
         url: 'inscriptions',
-        visible: true
+        visible: true  // TODOS pueden ver inscripciones
       }
     ];
 

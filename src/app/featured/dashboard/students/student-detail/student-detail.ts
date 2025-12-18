@@ -1,3 +1,4 @@
+// project-albuho/src/app/featured/dashboard/students/student-detail/student-detail.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -14,14 +15,13 @@ import { RootState } from '../../../../core/store';
   selector: 'app-student-detail',
   templateUrl: './student-detail.html',
   styleUrl: './student-detail.css',
-  standalone: false
+  standalone: false  // ← CAMBIAR DE true A false
 })
 export class StudentDetail implements OnInit {
-
   studentId: string | null = null;
   student$: Observable<Student | undefined>;
   inscriptions$: Observable<Inscription[]>;
-
+  
   profileLabels: { [key in StudentProfile]: string } = {
     [StudentProfile.DEVELOPER]: 'Desarrollador',
     [StudentProfile.IT]: 'IT',
@@ -42,13 +42,11 @@ export class StudentDetail implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = params['id'];
-
       if (id) {
         this.studentId = id;
-
         this.student$ = this.store.select(selectStudentById(id));
         this.inscriptions$ = this.store.select(selectInscriptionsByStudent(id));
-
+        
         // Cargar datos si aún no están en el store
         this.store.dispatch(StudentsActions.loadStudents());
         this.store.dispatch(InscriptionsActions.loadInscriptions());
@@ -69,7 +67,6 @@ export class StudentDetail implements OnInit {
       this.store.dispatch(
         StudentsActions.deleteStudent({ id: this.studentId })
       );
-
       this.router.navigate(['../../'], { relativeTo: this.route });
     }
   }
@@ -83,17 +80,21 @@ export class StudentDetail implements OnInit {
   }
 
   formatDate(date?: Date | string): string {
-  if (!date) {
-    return 'No disponible';
+    if (!date) {
+      return 'No disponible';
+    }
+    
+    const parsed = typeof date === 'string' ? new Date(date) : date;
+    
+    // Verificar si la fecha es válida
+    if (isNaN(parsed.getTime())) {
+      return 'Fecha inválida';
+    }
+    
+    return parsed.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   }
-
-  const parsed = typeof date === 'string' ? new Date(date) : date;
-
-  return parsed.toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-}
-
 }

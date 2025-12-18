@@ -1,3 +1,4 @@
+
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UsersService } from '../../../../core/services/users/users';
@@ -28,6 +29,18 @@ export class UsersEffects {
         this.usersService.createUser(user).pipe(
           map(newUser => UsersActions.createUserSuccess({ user: newUser })),
           catchError(error => of(UsersActions.createUserFailure({ error })))
+        )
+      )
+    )
+  );
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.updateUser),
+      mergeMap(({ id, user }) =>
+        this.usersService.updateUser(id, user).pipe(
+          map(updatedUser => UsersActions.updateUserSuccess({ user: updatedUser })),
+          catchError(error => of(UsersActions.updateUserFailure({ error })))
         )
       )
     )

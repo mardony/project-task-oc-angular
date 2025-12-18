@@ -1,3 +1,4 @@
+// project-albuho/src/app/featured/dashboard/students/store/students.selectors.ts
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { studentsFeatureKey, StudentsState } from './students.reducer';
 
@@ -5,7 +6,10 @@ const selectStudentsState = createFeatureSelector<StudentsState>(studentsFeature
 
 export const selectStudents = createSelector(
   selectStudentsState,
-  (state: StudentsState) => state.students
+  (state: StudentsState) => {
+    console.log('Selector selectStudents llamado, estado:', state);
+    return state.students;
+  }
 );
 
 export const selectIsLoading = createSelector(
